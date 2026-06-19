@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Notification = {
   id: number;
@@ -27,7 +27,7 @@ export function NotificationPanel({ isAuthenticated }: { isAuthenticated: boolea
   const [hasLoaded, setHasLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  async function loadNotifications() {
+  const loadNotifications = useCallback(async () => {
     setMessage("");
     setIsLoading(true);
 
@@ -50,7 +50,13 @@ export function NotificationPanel({ isAuthenticated }: { isAuthenticated: boolea
     } finally {
       setIsLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      void loadNotifications();
+    }
+  }, [isAuthenticated, loadNotifications]);
 
   async function markRead() {
     setMessage("");
@@ -85,7 +91,7 @@ export function NotificationPanel({ isAuthenticated }: { isAuthenticated: boolea
     <section className="notificationPanel" aria-label="届いた灯りの一覧">
       <div className="notificationActions">
         <button type="button" onClick={loadNotifications} disabled={isLoading}>
-          {isLoading ? "確認中" : hasLoaded ? "もう一度確認" : "確認する"}
+          {isLoading ? "更新中" : "更新"}
         </button>
         {hasLoaded && unreadCount > 0 ? (
           <button type="button" onClick={markRead} disabled={isLoading}>
