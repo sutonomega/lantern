@@ -373,7 +373,7 @@ h2 {
 }
 
 .notificationPanel {
-  padding-top: 18px;
+  padding-top: 0;
 }
 
 .discoverPanel {
@@ -385,7 +385,7 @@ h2 {
   gap: 8px;
   justify-content: flex-end;
   flex-shrink: 0;
-  margin-bottom: 16px;
+  margin: -4px 18px 18px auto;
 }
 
 .notificationActions button {
@@ -726,6 +726,10 @@ h2 {
 
   .searchForm {
     display: flex;
+  }
+
+  .notificationActions {
+    margin: 0 0 18px;
   }
 
   .formFooter button,
