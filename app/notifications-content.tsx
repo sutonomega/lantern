@@ -91,6 +91,11 @@ export function NotificationsContent({
 
   return (
     <>
+      <section className="pageIntro" aria-labelledby="notifications-page-title">
+        <h1 id="notifications-page-title">届いた灯り</h1>
+        <p>あなたのランタンに灯りがついた時だけ、ここに届きます。</p>
+      </section>
+
       <div className="notificationsTop">
         <AuthPanel initialUser={initialUser} />
 
@@ -107,11 +112,6 @@ export function NotificationsContent({
           </div>
         ) : null}
       </div>
-
-      <section className="pageIntro" aria-labelledby="notifications-page-title">
-        <h1 id="notifications-page-title">届いた灯り</h1>
-        <p>あなたのランタンに灯りがついた時だけ、ここに届きます。</p>
-      </section>
 
       <section className="notificationPanel" aria-label="届いた灯りの一覧">
         {!isAuthenticated ? (
