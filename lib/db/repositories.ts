@@ -230,6 +230,14 @@ export function createLight(database: DatabaseSync, input: { userId: number; pos
   return result.changes > 0;
 }
 
+export function deleteLight(database: DatabaseSync, input: { userId: number; postId: number }) {
+  const result = database
+    .prepare("DELETE FROM lights WHERE user_id = ? AND post_id = ?")
+    .run(input.userId, input.postId);
+
+  return result.changes > 0;
+}
+
 export function createLightNotification(
   database: DatabaseSync,
   input: { userId: number; actorUserId: number; postId: number }

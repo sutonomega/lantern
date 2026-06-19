@@ -44,12 +44,12 @@ export function PostComposer({ isAuthenticated }: { isAuthenticated: boolean }) 
 
   return (
     <form className="composeForm" onSubmit={handleSubmit}>
-      <label htmlFor="post-body">投稿本文</label>
+      <label htmlFor="post-body">置いておきたい一言</label>
       <textarea
         id="post-body"
         name="body"
         maxLength={maxPostLength}
-        placeholder={isAuthenticated ? "短い言葉を置く" : "ログインすると投稿できます"}
+        placeholder={isAuthenticated ? "短い言葉を置く" : "ログインすると灯りを置けます"}
         value={body}
         onChange={(event) => setBody(event.target.value)}
         disabled={!isAuthenticated || isSubmitting}

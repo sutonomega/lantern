@@ -2,7 +2,7 @@
 
 ## P0: MVP 完遂
 
-MVP は「登録して、匿名で投稿して、新着を読み、投稿を灯せる」状態を完成とします。
+MVP は「登録して、匿名で灯りを置き、新しいランタンを読み、ランタンを灯せる」状態を完成とします。
 
 1. [#1](https://github.com/sutonomega/lantern/issues/1) Next.js の土台とローカル開発環境を整える
 2. [#3](https://github.com/sutonomega/lantern/issues/3) users/posts/lights の SQLite 永続化を実装する
@@ -27,6 +27,18 @@ MVP は「登録して、匿名で投稿して、新着を読み、投稿を灯�
 6. [#13](https://github.com/sutonomega/lantern/issues/13) 自分の投稿削除を実装する
 
 #9、#11、#12、#13 は初期実装済み。#10 は API 実装済みですが、画面上の導線は保留します。
+
+## P1: UI レイアウト改善
+
+MVP 機能完了後は、スマホでの見やすさと Lantern らしい雰囲気を優先して整えます。
+
+1. [#15](https://github.com/sutonomega/lantern/issues/15) モバイル向けヘッダーとメニュー導線を整える
+2. [#19](https://github.com/sutonomega/lantern/issues/19) お知らせと検索を別ページへ分離する
+3. [#16](https://github.com/sutonomega/lantern/issues/16) 夜とランタンの背景・カードデザインへ整える
+4. [#17](https://github.com/sutonomega/lantern/issues/17) 灯すボタンをランタンモチーフにする
+5. [#18](https://github.com/sutonomega/lantern/issues/18) UI 方針と画面構成をドキュメントに反映する
+
+#15、#16、#17、#18、#19 は初期対応済みです。背景や灯すボタンは、今後のデザイン確認に合わせて細部を継続調整します。
 
 ## 通知方針
 

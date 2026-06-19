@@ -1,14 +1,14 @@
 :root {
-  color-scheme: light;
-  --background: #f7f3ea;
-  --surface: #fffaf0;
-  --surface-strong: #fff3cf;
-  --text: #241f18;
-  --muted: #756b5f;
-  --line: #ded2bf;
-  --accent: #c6532d;
-  --accent-strong: #9f3b20;
-  --shadow: 0 16px 42px rgb(56 38 20 / 12%);
+  color-scheme: dark;
+  --background: #07111e;
+  --surface: rgb(13 22 34 / 82%);
+  --surface-strong: rgb(255 189 89 / 18%);
+  --text: #fff7df;
+  --muted: #c8bdac;
+  --line: rgb(255 219 156 / 20%);
+  --accent: #f0a53a;
+  --accent-strong: #ffd58a;
+  --shadow: 0 20px 54px rgb(0 0 0 / 34%);
 }
 
 * {
@@ -16,17 +16,21 @@
 }
 
 html {
-  min-height: 100%;
+  min-height: 100vh;
   background: var(--background);
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
   color: var(--text);
   background:
-    linear-gradient(180deg, rgb(255 250 239 / 88%), rgb(247 243 234 / 100%)),
+    radial-gradient(circle at 18% 20%, rgb(255 178 84 / 20%), transparent 26rem),
+    radial-gradient(circle at 78% 82%, rgb(255 149 45 / 16%), transparent 20rem),
+    radial-gradient(circle at 50% 120%, rgb(240 165 58 / 14%), transparent 30rem),
+    linear-gradient(180deg, rgb(4 10 20 / 94%), rgb(8 19 31 / 98%)),
     var(--background);
+  background-attachment: fixed;
   font-family:
     Arial,
     "Hiragino Sans",
@@ -49,24 +53,72 @@ a {
 .appShell {
   width: min(960px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 56px;
+  padding: 18px 0 36px;
 }
 
 .topBar {
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 18px 0 28px;
+  margin-bottom: 16px;
+  padding: 14px 0 22px;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: var(--accent-strong);
-  font-size: 0.78rem;
+.topBar::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgb(7 17 30 / 96%), rgb(7 17 30 / 72%));
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--text);
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
+}
+
+.brandLantern {
+  position: relative;
+  width: 24px;
+  height: 30px;
+  border: 2px solid var(--accent-strong);
+  border-radius: 8px 8px 10px 10px;
+  box-shadow: 0 0 20px rgb(240 165 58 / 42%);
+}
+
+.brandLantern::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--accent-strong);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.brandLantern::after {
+  content: "";
+  position: absolute;
+  inset: 7px 6px 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgb(240 165 58 / 88%);
 }
 
 h1,
@@ -76,9 +128,9 @@ p {
 }
 
 h1 {
-  margin-bottom: 0;
-  font-size: clamp(2rem, 7vw, 4.8rem);
-  line-height: 0.98;
+  margin-bottom: 8px;
+  font-size: 1.65rem;
+  line-height: 1.25;
   letter-spacing: 0;
 }
 
@@ -90,7 +142,9 @@ h2 {
 }
 
 .actions {
+  position: relative;
   display: flex;
+  align-items: center;
   gap: 10px;
   flex-shrink: 0;
 }
@@ -102,7 +156,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 10px 16px;
-  background: rgb(255 250 240 / 82%);
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   font-weight: 700;
 }
@@ -110,7 +164,80 @@ h2 {
 .actions .primaryAction {
   border-color: var(--accent);
   background: var(--accent);
-  color: #fffaf0;
+  color: #1c1207;
+}
+
+.appMenu {
+  position: relative;
+}
+
+.menuButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+  border-color: transparent;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.menuButton span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.menuPanel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  min-width: 190px;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  background: rgb(9 16 28 / 96%);
+  box-shadow: var(--shadow);
+}
+
+.menuPanel a {
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.menuPanel a:hover,
+.menuPanel a[aria-current="page"] {
+  background: var(--surface-strong);
+  color: var(--accent-strong);
+}
+
+.pageIntro {
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.pageIntro p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.pageIntroWithActions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
 }
 
 .authPanel {
@@ -122,7 +249,8 @@ h2 {
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgb(255 250 240 / 72%);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .authStatus {
@@ -152,7 +280,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 9px 12px;
-  background: #fffdf7;
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
 }
 
@@ -167,7 +295,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 14px;
-  background: rgb(255 250 240 / 82%);
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   font-weight: 700;
 }
@@ -176,7 +304,7 @@ h2 {
 .authForm > button[type="submit"] {
   border-color: var(--accent);
   background: var(--accent);
-  color: #fffaf0;
+  color: #1c1207;
 }
 
 .composePanel {
@@ -216,7 +344,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 14px;
-  background: #fffdf7;
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   line-height: 1.7;
 }
@@ -245,15 +373,15 @@ h2 {
 }
 
 .feed {
-  padding-top: 36px;
+  padding-top: 28px;
 }
 
 .searchPanel {
-  padding-top: 32px;
+  padding-top: 0;
 }
 
 .notificationPanel {
-  padding-top: 32px;
+  padding-top: 0;
 }
 
 .discoverPanel {
@@ -263,7 +391,9 @@ h2 {
 .notificationActions {
   display: flex;
   gap: 8px;
+  justify-content: flex-end;
   flex-shrink: 0;
+  margin: 2px 18px 0 auto;
 }
 
 .notificationActions button {
@@ -271,7 +401,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 16px;
-  background: rgb(255 250 240 / 82%);
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   font-weight: 700;
   white-space: nowrap;
@@ -280,7 +410,7 @@ h2 {
 .notificationActions button:first-child {
   border-color: var(--accent);
   background: var(--accent);
-  color: #fffaf0;
+  color: #1c1207;
 }
 
 .notificationList {
@@ -298,7 +428,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 16px;
-  background: rgb(255 250 240 / 64%);
+  background: var(--surface);
 }
 
 .notificationItem p {
@@ -327,19 +457,12 @@ h2 {
   margin-bottom: 14px;
 }
 
-.searchForm label {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
 .searchForm input {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 9px 12px;
-  background: #fffdf7;
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
 }
 
@@ -349,7 +472,7 @@ h2 {
   border-radius: 999px;
   padding: 9px 16px;
   background: var(--accent);
-  color: #fffaf0;
+  color: #1c1207;
   font-weight: 700;
 }
 
@@ -374,9 +497,9 @@ h2 {
 
 .sectionHeading {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 18px;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
   margin-bottom: 16px;
 }
 
@@ -389,7 +512,7 @@ h2 {
   border: 1px dashed var(--line);
   border-radius: 8px;
   padding: 28px;
-  background: rgb(255 250 240 / 56%);
+  background: rgb(255 247 223 / 8%);
   color: var(--muted);
 }
 
@@ -402,7 +525,8 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 22px;
-  background: rgb(255 250 240 / 78%);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .postCard p {
@@ -430,7 +554,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px;
-  background: #fffdf7;
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   line-height: 1.7;
 }
@@ -458,6 +582,56 @@ h2 {
   background: var(--surface-strong);
 }
 
+.postCard .lightButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 112px;
+  border-color: rgb(255 213 138 / 56%);
+  background: rgb(240 165 58 / 16%);
+  color: var(--accent-strong);
+}
+
+.postCard .lightButton[aria-pressed="true"] {
+  background: rgb(240 165 58 / 28%);
+  color: var(--text);
+}
+
+.lightButtonIcon {
+  position: relative;
+  width: 17px;
+  height: 21px;
+  border: 2px solid currentColor;
+  border-radius: 6px 6px 8px 8px;
+  box-shadow: 0 0 14px rgb(240 165 58 / 46%);
+}
+
+.lightButtonIcon::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 4px;
+  width: 5px;
+  height: 6px;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+}
+
+.lightButtonIcon::after {
+  content: "";
+  position: absolute;
+  inset: 5px 4px 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgb(240 165 58 / 88%);
+}
+
+.lightCount {
+  color: var(--muted);
+}
+
 .ownerActions {
   display: flex;
   gap: 8px;
@@ -470,7 +644,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 10px;
-  background: rgb(255 250 240 / 72%);
+  background: rgb(255 247 223 / 10%);
   color: var(--text);
   font-weight: 700;
 }
@@ -508,16 +682,28 @@ h2 {
   .topBar,
   .sectionHeading {
     align-items: flex-start;
+  }
+
+  .sectionHeading {
     flex-direction: column;
   }
 
-  .actions {
-    width: 100%;
+  .pageIntroWithActions {
+    flex-direction: column;
   }
 
-  .actions a {
-    flex: 1;
-    text-align: center;
+  .topBar {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+
+  .actions .primaryAction {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   .composePanel {
@@ -554,8 +740,17 @@ h2 {
     display: flex;
   }
 
+  .notificationActions {
+    margin: 0 0 18px;
+  }
+
   .formFooter button,
-  .postCard button {
+  .postCard button:not(.lightButton) {
     width: 100%;
+  }
+
+  .postCard footer {
+    align-items: center;
+    flex-direction: row;
   }
 }

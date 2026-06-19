@@ -44,17 +44,12 @@ export function SearchPanel({ isAuthenticated }: { isAuthenticated: boolean }) {
   }
 
   return (
-    <section className="searchPanel" aria-labelledby="search-title">
-      <div className="sectionHeading">
-        <h2 id="search-title">検索</h2>
-        <p>本文だけを対象に探します。</p>
-      </div>
-
+    <section className="searchPanel" aria-label="検索フォーム">
       <form className="searchForm" onSubmit={handleSubmit}>
-        <label htmlFor="search-query">検索語</label>
         <input
           id="search-query"
           name="q"
+          aria-label="検索語"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="探したい言葉"
