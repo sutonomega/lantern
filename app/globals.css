@@ -232,6 +232,13 @@ h2 {
   line-height: 1.7;
 }
 
+.pageIntroWithActions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
 .authPanel {
   display: flex;
   align-items: center;
@@ -385,7 +392,7 @@ h2 {
   gap: 8px;
   justify-content: flex-end;
   flex-shrink: 0;
-  margin: -4px 18px 18px auto;
+  margin: 2px 18px 0 auto;
 }
 
 .notificationActions button {
@@ -677,6 +684,10 @@ h2 {
   }
 
   .sectionHeading {
+    flex-direction: column;
+  }
+
+  .pageIntroWithActions {
     flex-direction: column;
   }
 
