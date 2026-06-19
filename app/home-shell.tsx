@@ -45,7 +45,7 @@ export function HomeShell({
             <h2 id="compose-title">いま置いておきたい一言</h2>
             <p>
               {isAuthenticated
-                ? "名前は公開せず、短い言葉だけを新しいランタンに置きます。"
+                ? "あなたの一言を新しいランタンとして置きます。"
                 : "灯りを置くには登録またはログインが必要です。"}
             </p>
           </div>
