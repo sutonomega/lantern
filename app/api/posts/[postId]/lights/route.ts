@@ -5,6 +5,7 @@ import {
   countLights,
   createLight,
   createLightNotification,
+  deleteLight,
   findPostOwner,
   postExists
 } from "@/lib/db/repositories";
@@ -54,10 +55,17 @@ export async function POST(
           postId
         });
       }
+
+      return NextResponse.json({
+        lit: true,
+        lightCount: countLights(database, postId)
+      });
     }
 
+    deleteLight(database, { userId: auth.user.id, postId });
+
     return NextResponse.json({
-      lit: true,
+      lit: false,
       lightCount: countLights(database, postId)
     });
   } finally {

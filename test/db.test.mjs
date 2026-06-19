@@ -33,6 +33,32 @@ test("users, posts, and lights can be created with duplicate lights prevented", 
   }
 });
 
+test("lights can be toggled off by deleting the viewer light", () => {
+  const database = createDatabase();
+
+  try {
+    const userId = database
+      .prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)")
+      .run("toggle_user", "hash").lastInsertRowid;
+    const postId = database
+      .prepare("INSERT INTO posts (user_id, body) VALUES (?, ?)")
+      .run(userId, "灯りを戻すテスト").lastInsertRowid;
+
+    database.prepare("INSERT INTO lights (user_id, post_id) VALUES (?, ?)").run(userId, postId);
+    const deleteResult = database
+      .prepare("DELETE FROM lights WHERE user_id = ? AND post_id = ?")
+      .run(userId, postId);
+    const lightCount = database
+      .prepare("SELECT COUNT(*) AS count FROM lights WHERE post_id = ?")
+      .get(postId).count;
+
+    assert.equal(deleteResult.changes, 1);
+    assert.equal(lightCount, 0);
+  } finally {
+    database.close();
+  }
+});
+
 test("hidden posts are excluded for the viewer who hid them", () => {
   const database = createDatabase();
 

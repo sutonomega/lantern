@@ -20,7 +20,7 @@ export function LightButton({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleClick() {
-    if (!isAuthenticated || isLit || isSubmitting) {
+    if (!isAuthenticated || isSubmitting) {
       return;
     }
 
@@ -46,9 +46,9 @@ export function LightButton({
     <button
       type="button"
       className="lightButton"
-      aria-label={isLit ? "この投稿は灯しています" : "この投稿を灯す"}
+      aria-label={isLit ? "この投稿の灯りを取り消す" : "この投稿を灯す"}
       aria-pressed={isLit}
-      disabled={!isAuthenticated || isLit || isSubmitting}
+      disabled={!isAuthenticated || isSubmitting}
       onClick={handleClick}
     >
       <span className="lightButtonIcon" aria-hidden="true" />
