@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { AppMenu } from "@/app/app-menu";
 import { AuthPanel } from "@/app/auth-panel";
-import { NotificationPanel } from "@/app/notification-panel";
 import { PostCard, type DisplayPost } from "@/app/post-card";
 import { PostComposer } from "@/app/post-composer";
-import { SearchPanel } from "@/app/search-panel";
 
 export function HomeShell({
   initialUser,
@@ -20,9 +19,9 @@ export function HomeShell({
   return (
     <main className="appShell">
       <header className="topBar" aria-label="Lantern">
-        <div>
-          <p className="eyebrow">Lantern</p>
-          <h1>新しいランタン</h1>
+        <div className="brand">
+          <span className="brandLantern" aria-hidden="true" />
+          <span>Lantern</span>
         </div>
         <div className="actions" aria-label="主要操作">
           <button
@@ -34,6 +33,7 @@ export function HomeShell({
           >
             {isComposerOpen ? "閉じる" : "投稿する"}
           </button>
+          <AppMenu />
         </div>
       </header>
 
@@ -52,10 +52,6 @@ export function HomeShell({
           <PostComposer isAuthenticated={isAuthenticated} />
         </section>
       ) : null}
-
-      <NotificationPanel isAuthenticated={isAuthenticated} />
-
-      <SearchPanel isAuthenticated={isAuthenticated} />
 
       <section className="feed" id="feed" aria-labelledby="feed-title">
         <div className="sectionHeading">

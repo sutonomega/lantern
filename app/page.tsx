@@ -1,6 +1,5 @@
-import { cookies } from "next/headers";
 import { HomeShell } from "@/app/home-shell";
-import { findSessionUser, sessionCookieName } from "@/lib/auth/session";
+import { getCurrentUser } from "@/lib/auth/current-user";
 import { openDatabase } from "@/lib/db/client";
 import { listNewestPosts } from "@/lib/db/repositories";
 
@@ -16,12 +15,10 @@ function formatPostTime(value: string) {
 }
 
 export default async function Home() {
-  const cookieStore = await cookies();
-  const sessionId = cookieStore.get(sessionCookieName)?.value;
+  const user = await getCurrentUser();
   const database = openDatabase();
 
   try {
-    const user = sessionId ? findSessionUser(database, sessionId) : null;
     const posts = listNewestPosts(database, 30, user?.id);
 
     return (

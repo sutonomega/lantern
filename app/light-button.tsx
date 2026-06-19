@@ -45,12 +45,15 @@ export function LightButton({
   return (
     <button
       type="button"
+      className="lightButton"
       aria-label={isLit ? "この投稿は灯しています" : "この投稿を灯す"}
       aria-pressed={isLit}
       disabled={!isAuthenticated || isLit || isSubmitting}
       onClick={handleClick}
     >
-      {isLit ? "灯した" : "灯す"} {count}
+      <span className="lightButtonIcon" aria-hidden="true" />
+      <span>{isLit ? "灯した" : "灯す"}</span>
+      <span className="lightCount">{count}</span>
     </button>
   );
 }
