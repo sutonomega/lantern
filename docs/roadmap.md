@@ -2,7 +2,7 @@
 
 ## P0: MVP 完遂
 
-MVP は「登録して、匿名で投稿して、新着を読み、投稿を灯せる」状態を完成とします。
+MVP は「登録して、匿名で灯りを置き、新しいランタンを読み、ランタンを灯せる」状態を完成とします。
 
 1. [#1](https://github.com/sutonomega/lantern/issues/1) Next.js の土台とローカル開発環境を整える
 2. [#3](https://github.com/sutonomega/lantern/issues/3) users/posts/lights の SQLite 永続化を実装する

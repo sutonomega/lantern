@@ -82,22 +82,16 @@ export function NotificationPanel({ isAuthenticated }: { isAuthenticated: boolea
   }
 
   return (
-    <section className="notificationPanel" aria-labelledby="notification-title">
-      <div className="sectionHeading">
-        <div>
-          <h2 id="notification-title">灯りのお知らせ</h2>
-          <p>あなたの投稿ランタンに灯りがついた時だけ、静かに届きます。</p>
-        </div>
-        <div className="notificationActions">
-          <button type="button" onClick={loadNotifications} disabled={isLoading}>
-            {isLoading ? "確認中" : hasLoaded ? "もう一度確認" : "確認する"}
+    <section className="notificationPanel" aria-label="届いた灯りの一覧">
+      <div className="notificationActions">
+        <button type="button" onClick={loadNotifications} disabled={isLoading}>
+          {isLoading ? "確認中" : hasLoaded ? "もう一度確認" : "確認する"}
+        </button>
+        {hasLoaded && unreadCount > 0 ? (
+          <button type="button" onClick={markRead} disabled={isLoading}>
+            既読にする
           </button>
-          {hasLoaded && unreadCount > 0 ? (
-            <button type="button" onClick={markRead} disabled={isLoading}>
-              既読にする
-            </button>
-          ) : null}
-        </div>
+        ) : null}
       </div>
 
       {message ? (
@@ -113,7 +107,7 @@ export function NotificationPanel({ isAuthenticated }: { isAuthenticated: boolea
             {notifications.map((notification) => (
               <article className="notificationItem" key={notification.id}>
                 <p>
-                  投稿ランタンに灯りがつきました。
+                  あなたのランタンに灯りがつきました。
                   {notification.read_at ? "" : " 未読です。"}
                 </p>
                 <blockquote>{notification.post_body}</blockquote>

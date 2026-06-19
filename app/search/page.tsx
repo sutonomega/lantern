@@ -25,7 +25,7 @@ export default async function SearchPage() {
 
       <section className="pageIntro" aria-labelledby="search-page-title">
         <h1 id="search-page-title">検索</h1>
-        <p>気になる言葉が入った投稿ランタンを探します。</p>
+        <p>気になる言葉が入ったランタンを探します。</p>
       </section>
 
       <SearchPanel isAuthenticated={isAuthenticated} />

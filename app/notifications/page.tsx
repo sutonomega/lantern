@@ -25,7 +25,7 @@ export default async function NotificationsPage() {
 
       <section className="pageIntro" aria-labelledby="notifications-page-title">
         <h1 id="notifications-page-title">届いた灯り</h1>
-        <p>あなたの投稿ランタンに灯りがついた時だけ、ここに届きます。</p>
+        <p>あなたのランタンに灯りがついた時だけ、ここに届きます。</p>
       </section>
 
       {isAuthenticated ? (

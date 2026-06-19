@@ -31,7 +31,7 @@ export function HomeShell({
             aria-controls="compose"
             onClick={() => setIsComposerOpen((current) => !current)}
           >
-            {isComposerOpen ? "閉じる" : "投稿する"}
+            {isComposerOpen ? "閉じる" : "灯りを置く"}
           </button>
           <AppMenu />
         </div>
@@ -45,8 +45,8 @@ export function HomeShell({
             <h2 id="compose-title">いま置いておきたい一言</h2>
             <p>
               {isAuthenticated
-                ? "投稿者名は公開せず、短い言葉だけを新着に置きます。"
-                : "投稿するには登録またはログインが必要です。"}
+                ? "名前は公開せず、短い言葉だけを新しいランタンに置きます。"
+                : "灯りを置くには登録またはログインが必要です。"}
             </p>
           </div>
           <PostComposer isAuthenticated={isAuthenticated} />
@@ -56,7 +56,7 @@ export function HomeShell({
       <section className="feed" id="feed" aria-labelledby="feed-title">
         <div className="sectionHeading">
           <h2 id="feed-title">新しいランタン</h2>
-          <p>投稿ランタンに灯りをつけましょう。</p>
+          <p>気になるランタンに灯りをつけましょう。</p>
         </div>
 
         {posts.length > 0 ? (

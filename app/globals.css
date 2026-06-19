@@ -16,19 +16,21 @@
 }
 
 html {
-  min-height: 100%;
+  min-height: 100vh;
   background: var(--background);
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
   color: var(--text);
   background:
     radial-gradient(circle at 18% 20%, rgb(255 178 84 / 20%), transparent 26rem),
     radial-gradient(circle at 78% 82%, rgb(255 149 45 / 16%), transparent 20rem),
+    radial-gradient(circle at 50% 120%, rgb(240 165 58 / 14%), transparent 30rem),
     linear-gradient(180deg, rgb(4 10 20 / 94%), rgb(8 19 31 / 98%)),
     var(--background);
+  background-attachment: fixed;
   font-family:
     Arial,
     "Hiragino Sans",
@@ -51,20 +53,31 @@ a {
 .appShell {
   width: min(960px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 18px 0 56px;
+  padding: 18px 0 36px;
 }
 
 .topBar {
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   padding: 14px 0 22px;
-  position: sticky;
   top: 0;
   z-index: 10;
-  background: linear-gradient(180deg, rgb(7 17 30 / 96%), rgb(7 17 30 / 72%));
   backdrop-filter: blur(14px);
+}
+
+.topBar::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgb(7 17 30 / 96%), rgb(7 17 30 / 72%));
 }
 
 .brand {
@@ -158,12 +171,18 @@ h2 {
 }
 
 .menuButton {
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
   width: 44px;
   min-width: 44px;
   padding: 0;
+  border-color: transparent;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
 }
 
 .menuButton span {
@@ -346,15 +365,15 @@ h2 {
 }
 
 .feed {
-  padding-top: 36px;
+  padding-top: 28px;
 }
 
 .searchPanel {
-  padding-top: 32px;
+  padding-top: 0;
 }
 
 .notificationPanel {
-  padding-top: 32px;
+  padding-top: 0;
 }
 
 .discoverPanel {
@@ -364,7 +383,9 @@ h2 {
 .notificationActions {
   display: flex;
   gap: 8px;
+  justify-content: flex-end;
   flex-shrink: 0;
+  margin-bottom: 16px;
 }
 
 .notificationActions button {
@@ -426,13 +447,6 @@ h2 {
   gap: 10px;
   align-items: end;
   margin-bottom: 14px;
-}
-
-.searchForm label {
-  grid-column: 1 / -1;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 700;
 }
 
 .searchForm input {
